@@ -7,7 +7,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/person/:id', function(req, res) {
   db.Person.findByPk(req.params.id)
     .then(person => {
-      res.status(200).send(JSON.stringify(person));
+      res.status(200).json({
+        success: true,
+        data: person
+      });
     })
     .catch(err => {
       res.status(500).send(JSON.stringify(err));
@@ -45,7 +48,10 @@ app.delete('/person/:id', function(req, res) {
 app.get('/all', function(req, res) {
   db.Person.findAll()
     .then(persons => {
-      res.status(200).send(JSON.stringify(persons));
+      res.status(200).json({
+        success: true,
+        data: persons
+      });
     })
     .catch(err => {
       res.status(500).send(JSON.stringify(err));
